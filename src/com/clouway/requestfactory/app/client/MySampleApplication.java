@@ -30,15 +30,16 @@ public class MySampleApplication implements EntryPoint {
     final Label label = new Label("");
 
     final EventBus eventBus = new SimpleEventBus();
+
+
     final UserRequestFactory factory = GWT.create(UserRequestFactory.class);
     factory.initialize(eventBus);
 
-
-    final UserRequestFactory.UserRequest userRequest = factory.userRequest();
-
     button.addClickHandler(new ClickHandler() {
       public void onClick(ClickEvent event) {
+        label.setText("");
 
+        final UserRequestFactory.UserRequest userRequest = factory.userRequest();
         userRequest.getRandomUser().fire(new Receiver<UserProxy>() {
 
           @Override
@@ -48,6 +49,8 @@ public class MySampleApplication implements EntryPoint {
             label.setText(email + ", " + password);
           }
         });
+
+
       }
     });
 

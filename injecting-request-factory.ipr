@@ -197,17 +197,17 @@
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="VcsDirectoryMappings">
-    <mapping directory="" vcs="" />
+    <mapping directory="" vcs="Git" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
     <library name="gwt-user">
       <CLASSES>
-        <root url="jar://$USER_HOME$/development/gwt-2.1.1/gwt-user.jar!/" />
+        <root url="jar://$GWT_HOME$/gwt-user.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/development/gwt-2.1.1/gwt-user.jar!/" />
+        <root url="jar://$GWT_HOME$/gwt-user.jar!/" />
       </SOURCES>
     </library>
     <library name="lib">

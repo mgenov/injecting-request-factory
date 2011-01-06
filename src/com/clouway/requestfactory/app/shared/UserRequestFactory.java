@@ -19,6 +19,7 @@ public interface UserRequestFactory extends RequestFactory {
 
     Request<UserProxy> getRandomUser();
 
+    Request<Void> persist(UserProxy userProxy);
   }
 
 

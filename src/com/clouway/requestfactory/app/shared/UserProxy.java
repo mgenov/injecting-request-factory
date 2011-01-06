@@ -15,4 +15,8 @@ public interface UserProxy extends ValueProxy {
 
   String getPassword();
 
+  void setEmail(String email);
+
+  void setPassword(String password);
+
 }

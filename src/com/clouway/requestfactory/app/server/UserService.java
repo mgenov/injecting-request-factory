@@ -21,4 +21,8 @@ public class UserService {
   public User getRandomUser() {
     return user;
   }
+
+  public void persist(User user) {
+    System.out.println("User:" + user.getEmail() + ", " + user.getPassword());
+  }
 }

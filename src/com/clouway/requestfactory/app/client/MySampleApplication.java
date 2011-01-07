@@ -77,6 +77,8 @@ public class MySampleApplication implements EntryPoint {
     container.add(label);
 
     RootPanel.get("container").add(container);
+
+    //test
   }
 
 }

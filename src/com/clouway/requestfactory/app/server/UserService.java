@@ -18,10 +18,11 @@ public class UserService {
     this.user = user;
   }
 
+  @SuppressWarnings("unused")
   public User getRandomUser() {
     return user;
   }
-
+  @SuppressWarnings("unused")
   public void persist(User user) {
     System.out.println("User:" + user.getEmail() + ", " + user.getPassword());
   }

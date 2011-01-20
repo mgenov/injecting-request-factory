@@ -14,7 +14,7 @@ import java.util.Set;
  * InjectingServiceLayerDecorator is a ServiceLayerDecorator that uses DI to inject
  * service, entities and the JSR 303 validator.
  */
-class InjectingServiceLayerDecorator extends ServiceLayerDecorator {
+public class InjectingServiceLayerDecorator extends ServiceLayerDecorator {
   /**
    * JSR 303 validator used to validate requested entities.
    * */

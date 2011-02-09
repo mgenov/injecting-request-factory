@@ -1,6 +1,8 @@
 package com.clouway.requestfactory.app.model;
 
 /**
+ * User represents a single user in the system.
+ *
  * @author Miroslav Genov (mgenov@gmail.com)
  */
 public class User {

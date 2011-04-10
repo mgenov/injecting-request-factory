@@ -1,0 +1,14 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+  <g:HTMLPanel>
+    <div style="text-align: right">
+      Name: <g:TextBox ui:field="nameBox"/>
+      <br/>
+
+      <g:CaptionPanel captionText="Provided Services">
+        <g:FlowPanel ui:field="services"/>
+      </g:CaptionPanel>
+
+    </div>
+  </g:HTMLPanel>
+</ui:UiBinder>

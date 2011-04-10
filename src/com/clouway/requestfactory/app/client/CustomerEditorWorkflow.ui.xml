@@ -1,0 +1,13 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:ed='urn:import:com.clouway.requestfactory.app.client'
+            >
+  <g:HTMLPanel>
+    <h1>Edit Customer Details</h1>
+    <ed:CustomerEditor ui:field="customerEditor"/>
+    <div>
+        <g:Button ui:field="preview">Preview</g:Button>
+        <g:Button ui:field="save">Save</g:Button>
+    </div>
+  </g:HTMLPanel>
+</ui:UiBinder>

@@ -1,5 +1,8 @@
 package com.clouway.requestfactory.app.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Miroslav Genov (mgenov@gmail.com)
  */
@@ -7,8 +10,10 @@ public class Customer {
   private Long id;
   private String name;
 
+  private List<ProvidedService> services = new ArrayList<ProvidedService>();
+
   @SuppressWarnings("unused")
-  Customer() {
+  public Customer() {
   }
 
   public Customer(Long id, String name) {
@@ -20,7 +25,23 @@ public class Customer {
     return id;
   }
 
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
   public String getName() {
     return name;
+  }
+
+  public List<ProvidedService> getServices() {
+    return services;
+  }
+
+  public void setServices(List<ProvidedService> services) {
+    this.services = services;
   }
 }

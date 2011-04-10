@@ -30,7 +30,7 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.resetToDefault;
 
 /**
- * Provides an way of directly injection of {@link com.google.gwt.requestfactory.shared.RequestFactory} classes and target classes marked as {@literal@}Service. To provide injection
+ * Provides an way of directly injection of {@link com.google.gwt.requestfactory.shared.RequestFactory} classes and target classes marked as {@literal@}ProvidedService. To provide injection
  * in your class you have to extends the {@link RequestFactoryJreTest}, after that you are free to inject service classes and RequestFactory classes.
  * <p/>
  * Here is an example how to accomplish this:

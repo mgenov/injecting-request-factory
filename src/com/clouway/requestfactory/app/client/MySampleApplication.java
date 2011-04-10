@@ -1,19 +1,18 @@
 package com.clouway.requestfactory.app.client;
 
-import com.clouway.requestfactory.app.shared.UserProxy;
-import com.clouway.requestfactory.app.shared.UserRequestFactory;
+import com.clouway.requestfactory.app.shared.CustomerProxy;
+import com.clouway.requestfactory.app.shared.CustomerRequestFactory;
+import com.clouway.requestfactory.app.shared.CustomerRequestFactory.CustomerRequest;
+import com.clouway.requestfactory.app.shared.ProvidedServiceProxy;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>
@@ -25,56 +24,27 @@ public class MySampleApplication implements EntryPoint {
    */
   public void onModuleLoad() {
     VerticalPanel container = new VerticalPanel();
-
-    final Button button = new Button("Get User !");
-    final Label label = new Label("");
-
     final EventBus eventBus = new SimpleEventBus();
 
 
-    final UserRequestFactory factory = GWT.create(UserRequestFactory.class);
-    factory.initialize(eventBus);
+    final CustomerRequestFactory requestFactory = GWT.create(CustomerRequestFactory.class);
+    requestFactory.initialize(eventBus);
 
-    button.addClickHandler(new ClickHandler() {
-      public void onClick(ClickEvent event) {
-        label.setText("");
+    CustomerRequest customerRequest = requestFactory.customerRequest();
 
-        final UserRequestFactory.UserRequest userRequest = factory.userRequest();
-        userRequest.getRandomUser().fire(new Receiver<UserProxy>() {
-
-          @Override
-          public void onSuccess(UserProxy response) {
-            String email = response.getEmail();
-            String password = response.getPassword();
-            label.setText(email + ", " + password);
-          }
-        });
-
-      }
-    });
-
-    Button persist = new Button("Persist Test User");
-    persist.addClickHandler(new ClickHandler() {
-      public void onClick(ClickEvent event) {
-        final UserRequestFactory.UserRequest userRequest = factory.userRequest();
-        UserProxy user = userRequest.create(UserProxy.class);
-        user.setEmail("test@test.com");
-        user.setPassword("tesstttt");
-
-        userRequest.persist(user).fire(new Receiver<Void>() {
-          @Override
-          public void onSuccess(Void response) {
-            label.setText("user persisted");
-          }
-        });
-      }
-    });
-
-    container.add(button);
-    container.add(new HTML("<br/><br/>"));
-    container.add(persist);
-    container.add(new HTML("<br/><br/>"));
-    container.add(label);
+    CustomerEditorWorkflow customerEditorWorkflow = new CustomerEditorWorkflow(requestFactory,customerRequest);
+    CustomerProxy p = customerRequest.create(CustomerProxy.class);
+    p.setName("Test");
+    List<ProvidedServiceProxy> services = new ArrayList<ProvidedServiceProxy>();
+    for (int i = 0;i < 5;i++) {
+      ProvidedServiceProxy providedService = customerRequest.create(ProvidedServiceProxy.class);
+      providedService.setName("service:" + (i+1));
+      providedService.setPrice(20d);
+      services.add(providedService);
+    }
+    p.setServices(services);
+    customerEditorWorkflow.edit(p);
+    container.add(customerEditorWorkflow);
 
     RootPanel.get("container").add(container);
 

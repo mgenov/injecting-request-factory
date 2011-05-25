@@ -13,7 +13,13 @@ import java.util.List;
 @ProxyFor(value = Customer.class,locator = EntityLocator.class)
 public interface CustomerProxy extends EntityProxy {
 
+  void setId(Long id);
+
   Long getId();
+
+  void setVersion(Long version);
+
+  Long getVersion();
 
   void setName(String name);
 

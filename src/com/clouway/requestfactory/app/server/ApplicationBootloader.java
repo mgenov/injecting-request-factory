@@ -5,6 +5,7 @@ import com.clouway.requestfactory.app.model.User;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Singleton;
 import com.google.inject.servlet.GuiceServletContextListener;
 
 /**
@@ -22,6 +23,7 @@ public class ApplicationBootloader extends GuiceServletContextListener {
         install(new RequestFactoryInjectingModule("/gwtRequest"));
 
         bind(User.class).toInstance(new User("test@test.com", "1234567"));
+        bind(CustomerService.class).to(CustomerServiceImpl.class).in(Singleton.class);
       }
     });
 

@@ -5,11 +5,8 @@
       <configuration>
         <setting name="compilerMaxHeapSize" value="128" />
         <setting name="gwtScriptOutputStyle" value="DETAILED" />
-        <setting name="gwtSdkUrl" value="file://C:/development/gwt-2.2.0" />
+        <setting name="gwtSdkUrl" value="file://$USER_HOME$/development/gwt-2.2.0" />
         <setting name="webFacet" value="Web" />
-        <packaging>
-          <module name="com.clouway.requestfactory.app.MySampleApplication" path="/MySampleApplication" />
-        </packaging>
       </configuration>
     </facet>
     <facet type="web" name="Web">

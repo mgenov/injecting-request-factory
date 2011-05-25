@@ -1,21 +1,23 @@
 package com.clouway.requestfactory.app.server;
 
 import com.clouway.requestfactory.app.model.Customer;
-import com.google.gwt.requestfactory.shared.Locator;
+import com.google.web.bindery.requestfactory.shared.Locator;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+
+import javax.inject.Inject;
+
 
 /**
  * @author Miroslav Genov (mgenov@gmail.com)
  */
 public class EntityLocator<T> extends Locator<T, Long> {
 
-   private Map<Long, Customer> customers = new HashMap<Long, Customer>() {{
-    put(1l,new Customer(1l, "customer1", new Date(),1l));
-    put(2l,new Customer(2l, "customer2", new Date(),1l));
-  }};
+  private final CustomerService customerService;
+
+  @Inject
+  public EntityLocator(CustomerService customerService) {
+    this.customerService = customerService;
+  }
 
   @Override
   public T create(Class<? extends T> clazz) {
@@ -31,7 +33,7 @@ public class EntityLocator<T> extends Locator<T, Long> {
 
   @Override
   public T find(Class<? extends T> clazz, Long id) {
-    return (T) customers.get(id);
+    return (T) customerService.findCustomer(id);
   }
 
   @Override
@@ -41,13 +43,8 @@ public class EntityLocator<T> extends Locator<T, Long> {
 
   @Override
   public Long getId(T domainObject) {
-    for (Customer customer : customers.values()) {
-      Customer c = (Customer) domainObject;
-      if (c.getId() != null && c.getId().equals(customer.getId())) {
-        return c.getId();
-      }
-    }
-    return null;
+    Customer c = (Customer) domainObject;
+    return c.getId();
   }
 
   @Override

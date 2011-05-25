@@ -2,8 +2,8 @@ package com.clouway.requestfactory.app.shared;
 
 import com.clouway.requestfactory.app.model.Customer;
 import com.clouway.requestfactory.app.server.EntityLocator;
-import com.google.gwt.requestfactory.shared.EntityProxy;
-import com.google.gwt.requestfactory.shared.ProxyFor;
+import com.google.web.bindery.requestfactory.shared.EntityProxy;
+import com.google.web.bindery.requestfactory.shared.ProxyFor;
 
 import java.util.List;
 

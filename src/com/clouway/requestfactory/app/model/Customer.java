@@ -1,5 +1,7 @@
 package com.clouway.requestfactory.app.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,6 +11,9 @@ import java.util.List;
  */
 public class Customer {
   private Long id;
+
+  @NotNull
+  @Size(min=3, max=16)
   private String name;
   private Date installationDate;
   private Long version;

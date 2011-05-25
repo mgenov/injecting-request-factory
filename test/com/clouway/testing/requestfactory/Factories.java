@@ -1,6 +1,7 @@
 package com.clouway.testing.requestfactory;
 
-import com.google.gwt.requestfactory.shared.RequestFactory;
+
+import com.google.web.bindery.requestfactory.shared.RequestFactory;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

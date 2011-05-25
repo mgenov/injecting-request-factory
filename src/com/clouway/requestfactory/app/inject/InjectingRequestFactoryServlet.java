@@ -1,9 +1,9 @@
 package com.clouway.requestfactory.app.inject;
 
-import com.google.gwt.requestfactory.server.DefaultExceptionHandler;
-import com.google.gwt.requestfactory.server.RequestFactoryServlet;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.web.bindery.requestfactory.server.DefaultExceptionHandler;
+import com.google.web.bindery.requestfactory.server.RequestFactoryServlet;
 
 /**
  * An implementation of the RequestFactoryServlet that is using Guice to inject the {@link InjectingServiceLayerDecorator}, so

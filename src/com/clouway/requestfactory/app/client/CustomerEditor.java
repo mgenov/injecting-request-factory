@@ -55,12 +55,15 @@ public class CustomerEditor extends Composite implements Editor<CustomerProxy>,
   }
 
   public void setValue(CustomerProxy value) {
-     for (ProvidedServiceProxy providedService : value.getServices()) {
-      ProvidedServiceEditor serviceEditor = new ProvidedServiceEditor();
-      services.add(serviceEditor);
+    if (value.getServices() != null) {
+      for (ProvidedServiceProxy providedService : value.getServices()) {
+        ProvidedServiceEditor serviceEditor = new ProvidedServiceEditor();
+        services.add(serviceEditor);
 
-      editorChain.attach(providedService, serviceEditor);
+        editorChain.attach(providedService, serviceEditor);
+      }
     }
+
   }
 
   public void setDelegate(EditorDelegate<CustomerProxy> customerProxyEditorDelegate) {

@@ -4,16 +4,17 @@ import com.clouway.requestfactory.app.inject.InjectingServiceLayerDecorator;
 import com.clouway.requestfactory.app.inject.RequestFactoryInjectingModule;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
-import com.google.gwt.requestfactory.server.ServiceLayer;
-import com.google.gwt.requestfactory.server.SimpleRequestProcessor;
-import com.google.gwt.requestfactory.server.testing.InProcessRequestTransport;
-import com.google.gwt.requestfactory.server.testing.RequestFactoryMagic;
-import com.google.gwt.requestfactory.shared.RequestFactory;
-import com.google.gwt.requestfactory.shared.Service;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.web.bindery.requestfactory.server.ServiceLayer;
+import com.google.web.bindery.requestfactory.server.SimpleRequestProcessor;
+import com.google.web.bindery.requestfactory.server.testing.InProcessRequestTransport;
+import com.google.web.bindery.requestfactory.shared.RequestFactory;
+import com.google.web.bindery.requestfactory.shared.Service;
+import com.google.web.bindery.requestfactory.vm.RequestFactorySource;
 import org.junit.Before;
 
 import java.lang.reflect.Method;
@@ -181,7 +182,7 @@ public abstract class RequestFactoryJreTest {
    * could be injected when test is requesting such injection.
    */
   private <T extends RequestFactory> T bindRequestFactory(Binder binder, Class<T> clazz) {
-    T t = RequestFactoryMagic.create(clazz);
+    T t = RequestFactorySource.create(clazz);
     binder.bind(clazz).toInstance(t);
     return t;
   }

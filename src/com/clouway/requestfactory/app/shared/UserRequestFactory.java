@@ -3,10 +3,11 @@ package com.clouway.requestfactory.app.shared;
 
 import com.clouway.requestfactory.app.inject.InjectingServiceLocator;
 import com.clouway.requestfactory.app.server.UserService;
-import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.RequestContext;
-import com.google.gwt.requestfactory.shared.RequestFactory;
-import com.google.gwt.requestfactory.shared.Service;
+import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.RequestContext;
+import com.google.web.bindery.requestfactory.shared.RequestFactory;
+import com.google.web.bindery.requestfactory.shared.Service;
+
 
 /**
  * TODO: Write some comments

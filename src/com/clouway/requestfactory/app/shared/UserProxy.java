@@ -1,8 +1,8 @@
 package com.clouway.requestfactory.app.shared;
 
 import com.clouway.requestfactory.app.model.User;
-import com.google.gwt.requestfactory.shared.ProxyFor;
-import com.google.gwt.requestfactory.shared.ValueProxy;
+import com.google.web.bindery.requestfactory.shared.ProxyFor;
+import com.google.web.bindery.requestfactory.shared.ValueProxy;
 
 
 /**

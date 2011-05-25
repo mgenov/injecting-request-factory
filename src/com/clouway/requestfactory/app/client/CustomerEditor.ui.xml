@@ -1,8 +1,17 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:e='urn:import:com.google.gwt.editor.ui.client'
+        >
   <g:HTMLPanel>
     <div style="text-align: right">
-      Name: <g:TextBox ui:field="nameBox"/>
+
+      Name:
+      <e:ValueBoxEditorDecorator>
+        <e:valuebox>
+          <g:TextBox ui:field="nameBox"/>
+        </e:valuebox>
+      </e:ValueBoxEditorDecorator>
+
       <br/>
 
       <g:CaptionPanel captionText="Provided Services">

@@ -1,9 +1,9 @@
 package com.clouway.requestfactory.app.inject;
 
-import com.google.gwt.requestfactory.server.ServiceLayerDecorator;
-import com.google.gwt.requestfactory.shared.Locator;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.web.bindery.requestfactory.server.ServiceLayerDecorator;
+import com.google.web.bindery.requestfactory.shared.Locator;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;

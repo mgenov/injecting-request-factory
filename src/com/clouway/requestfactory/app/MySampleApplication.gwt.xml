@@ -7,8 +7,9 @@
 
   <!-- Inherit the core Web Toolkit stuff.                  -->
   <inherits name='com.google.gwt.user.User'/>
-  <inherits name='com.google.gwt.requestfactory.RequestFactory' />
   <inherits name="com.google.gwt.editor.Editor"/>
+  <inherits name="com.google.web.bindery.requestfactory.RequestFactory"/>
+  <inherits name="javax.validation.Validation"/>
 
   <!-- Specify the app entry point class.                   -->
   <entry-point class='com.clouway.requestfactory.app.client.MySampleApplication'/>

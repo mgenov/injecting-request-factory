@@ -32,7 +32,7 @@ public class UpdateExistingEntityTest extends RequestFactoryJreTest {
   private CustomerService customerService;
 
   @Test
-  public void testUpdateUser() {
+  public void testUpdateCustomer() {
     Capture<Customer> customerCapture = new Capture<Customer>();
 
     customerService.store(capture(customerCapture));

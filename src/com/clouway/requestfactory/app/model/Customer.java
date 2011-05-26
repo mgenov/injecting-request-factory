@@ -17,6 +17,7 @@ public class Customer {
   private String name;
   private Date installationDate;
   private Long version;
+  private Integer age;
 
   private List<ProvidedService> services = new ArrayList<ProvidedService>();
 
@@ -24,22 +25,20 @@ public class Customer {
   public Customer() {
   }
 
-  public Customer(Long id, String name) {
-    this.id = id;
-    this.name = name;
-  }
-
-  public Customer(Long id, String name, Date installationDate) {
+  public Customer(Long id, String name, Date installationDate, Integer age, Long version) {
     this.id = id;
     this.name = name;
     this.installationDate = installationDate;
-  }
-
-  public Customer(Long id, String name, Date installationDate, Long version) {
-    this.id = id;
-    this.name = name;
-    this.installationDate = installationDate;
+    this.age = age;
     this.version = version;
+  }
+
+  public Integer getAge() {
+    return age;
+  }
+
+  public void setAge(Integer age) {
+    this.age = age;
   }
 
   public Long getId() {

@@ -6,9 +6,16 @@
     <div style="text-align: right">
 
       Name:
-      <e:ValueBoxEditorDecorator>
+       <e:ValueBoxEditorDecorator ui:field="name">
         <e:valuebox>
-          <g:TextBox ui:field="nameBox"/>
+          <g:TextBox/>
+        </e:valuebox>
+      </e:ValueBoxEditorDecorator>
+
+       Age:
+      <e:ValueBoxEditorDecorator ui:field="age">
+        <e:valuebox>
+          <g:TextBox/>
         </e:valuebox>
       </e:ValueBoxEditorDecorator>
 

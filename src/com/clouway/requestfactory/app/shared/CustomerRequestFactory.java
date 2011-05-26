@@ -2,6 +2,7 @@ package com.clouway.requestfactory.app.shared;
 
 import com.clouway.requestfactory.app.inject.InjectingServiceLocator;
 import com.clouway.requestfactory.app.server.CustomerService;
+import com.google.web.bindery.requestfactory.shared.InstanceRequest;
 import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
@@ -16,7 +17,7 @@ public interface CustomerRequestFactory extends RequestFactory {
   @Service(value = CustomerService.class, locator = InjectingServiceLocator.class)
   interface CustomerRequest extends RequestContext {
 
-    Request<Void> store(CustomerProxy customerProxy);
+    Request<CustomerProxy> store(CustomerProxy customerProxy);
 
     Request<CustomerProxy> findCustomer(Long id);
   }

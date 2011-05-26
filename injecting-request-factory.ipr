@@ -203,14 +203,14 @@
   <component name="libraryTable">
     <library name="gwt-user">
       <CLASSES>
-        <root url="jar://$USER_HOME$/development/gwt-2.3.0/gwt-user.jar!/" />
-        <root url="jar://$USER_HOME$/development/gwt-2.3.0/gwt-servlet-deps.jar!/" />
-        <root url="jar://$USER_HOME$/development/gwt-2.3.0/gwt-servlet.jar!/" />
-        <root url="jar://$USER_HOME$/development/gwt-2.3.0/gwt-dev.jar!/" />
+        <root url="jar://$USER_HOME$/development/gwt-0.0.0/gwt-user.jar!/" />
+        <root url="jar://$USER_HOME$/development/gwt-0.0.0/gwt-servlet-deps.jar!/" />
+        <root url="jar://$USER_HOME$/development/gwt-0.0.0/gwt-servlet.jar!/" />
+        <root url="jar://$USER_HOME$/development/gwt-0.0.0/gwt-dev.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/development/gwt-2.3.0/gwt-user.jar!/" />
+        <root url="jar://$USER_HOME$/development/gwt-0.0.0/gwt-user.jar!/" />
       </SOURCES>
     </library>
     <library name="lib">

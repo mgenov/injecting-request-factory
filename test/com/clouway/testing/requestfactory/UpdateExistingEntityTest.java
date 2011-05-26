@@ -34,7 +34,7 @@ public class UpdateExistingEntityTest extends RequestFactoryJreTest {
   @Test
   public void testUpdateCustomer() {
     Capture<Customer> customerCapture = new Capture<Customer>();
-    Customer customer1 = new Customer(1l, "customer1", new Date(), 1l);
+    Customer customer1 = new Customer(1l, "customer1", new Date(), 21, 1l);
     customer1.getServices().add(new ProvidedService("testttttt", 20d));
     expect(customerService.findCustomer(1l)).andReturn(customer1).anyTimes();
     customerService.store(capture(customerCapture));
@@ -59,9 +59,10 @@ public class UpdateExistingEntityTest extends RequestFactoryJreTest {
         services.add(service);
         entity.getServices().add(service);
 
-        editRequest.store(entity).to(new Receiver<Void>() {
+
+        editRequest.store(entity).to(new Receiver<CustomerProxy>() {
           @Override
-          public void onSuccess(Void response) {
+          public void onSuccess(CustomerProxy response) {
 
           }
         }).fire();

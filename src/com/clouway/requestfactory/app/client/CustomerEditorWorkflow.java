@@ -3,7 +3,12 @@ package com.clouway.requestfactory.app.client;
 import com.clouway.requestfactory.app.shared.CustomerProxy;
 import com.clouway.requestfactory.app.shared.CustomerRequestFactory;
 import com.clouway.requestfactory.app.shared.CustomerRequestFactory.CustomerRequest;
+import com.clouway.requestfactory.app.shared.ProvidedServiceProxy;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.editor.client.Editor;
+import com.google.gwt.editor.client.EditorContext;
+import com.google.gwt.editor.client.EditorVisitor;
+import com.google.gwt.editor.client.impl.BaseEditorDriver;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -12,11 +17,17 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.web.bindery.requestfactory.gwt.client.HasRequestContext;
 import com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver;
+import com.google.web.bindery.requestfactory.gwt.client.impl.RequestFactoryEditorDelegate;
 import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import com.google.web.bindery.requestfactory.shared.Violation;
+import sun.beans.editors.DoubleEditor;
 
+import javax.validation.ConstraintViolation;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -46,8 +57,7 @@ public class CustomerEditorWorkflow extends Composite {
   Button save;
 
   private final CustomerRequestFactory requestFactory;
-  private CustomerRequest requestContext;
-  private CustomerProxy currentCustomer;
+  public CustomerProxy currentCustomer;
 
   public CustomerEditorWorkflow(CustomerRequestFactory requestFactory) {
     this.requestFactory = requestFactory;
@@ -56,65 +66,60 @@ public class CustomerEditorWorkflow extends Composite {
   }
 
   public void loadCustomer(Long customerId) {
-    requestFactory.customerRequest().findCustomer(customerId).with("services").to(new Receiver<CustomerProxy>() {
 
+    editorDriver = GWT.create(Driver.class);
+    editorDriver.initialize(requestFactory, customerEditor);
+
+    requestFactory.customerRequest().findCustomer(customerId).with("services").to(new Receiver<CustomerProxy>() {
 
       @Override
       public void onSuccess(CustomerProxy entity) {
-        currentCustomer = entity;
-        edit(entity);
+
+        editCustomer(entity);
+
+
       }
     }).fire();
 
   }
 
-  private void edit(CustomerProxy entity) {
-    requestContext = requestFactory.customerRequest();
+  private void editCustomer(CustomerProxy entity) {
+    CustomerRequest requestContext = requestFactory.customerRequest();
 
     entity = requestContext.edit(entity);
 
-    editorDriver = GWT.create(Driver.class);
-    editorDriver.initialize(requestFactory, customerEditor);
     editorDriver.edit(entity, requestContext);
-  }
 
-  @UiHandler("preview")
-  public void onPreview(ClickEvent clickEvent) {
+    currentCustomer = entity;
 
-    CustomerRequest context = (CustomerRequest) editorDriver.flush();
-
-    context.store(currentCustomer).to(new Receiver<Void>() {
+    requestContext.store(currentCustomer).with(editorDriver.getPaths()).to(new Receiver<CustomerProxy>() {
       @Override
-      public void onSuccess(Void response) {
-        edit(currentCustomer);
+      public void onSuccess(CustomerProxy response) {
 
-      }
-    });
-
-    if (editorDriver.hasErrors()) {
-      Window.alert("Errors detected locally");
-      return;
-    }
-
-    context.fire(new Receiver<Void>() {
-      @Override
-      public void onSuccess(Void response) {
-
-      }
-
-      @Override
-      public void onViolation(Set<Violation> errors) {
-//        super.onViolation(errors);
-        editorDriver.setViolations(errors);
-        Window.alert("Violations size: " + errors.size());
+        editCustomer(response);
       }
 
       @Override
       public void onFailure(ServerFailure error) {
 
       }
+
+      @Override
+      public void onConstraintViolation(Set<ConstraintViolation<?>> violations) {
+        editorDriver.setConstraintViolations(violations);
+      }
     });
+  }
 
+  @UiHandler("preview")
+  public void onPreview(ClickEvent clickEvent) {
+    RequestContext requestContext = editorDriver.flush();
 
+    if (editorDriver.hasErrors()) {
+      Window.alert("Errors detected locally");
+      return;
+    }
+
+    requestContext.fire();
   }
 }

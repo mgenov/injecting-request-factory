@@ -6,12 +6,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.CompositeEditor;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.EditorDelegate;
+import com.google.gwt.editor.ui.client.ValueBoxEditorDecorator;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.TextBox;
 
 /**
  * @author Miroslav Genov (mgenov@gmail.com)
@@ -25,12 +25,16 @@ public class CustomerEditor extends Composite implements Editor<CustomerProxy>,
 
   private static CustomerEditorUiBinder uiBinder = GWT.create(CustomerEditorUiBinder.class);
 
-  @UiField
-  @Path("name")
-  TextBox nameBox;
+
 
   @UiField
   FlowPanel services;
+
+  @UiField
+  ValueBoxEditorDecorator<String> name;
+
+  @UiField
+  ValueBoxEditorDecorator<Integer> age;
 
   public CustomerEditor() {
     initWidget(uiBinder.createAndBindUi(this));

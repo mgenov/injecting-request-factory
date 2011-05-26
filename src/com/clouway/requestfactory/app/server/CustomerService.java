@@ -9,6 +9,6 @@ public interface CustomerService {
 
   Customer findCustomer(Long id);
 
-  void store(Customer customer);
+  Customer store(Customer customer);
 
 }

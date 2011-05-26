@@ -28,4 +28,8 @@ public interface CustomerProxy extends EntityProxy {
   List<ProvidedServiceProxy> getServices();
 
   void setServices(List<ProvidedServiceProxy> services);
+
+  Integer getAge();
+
+  void setAge(Integer age);
 }

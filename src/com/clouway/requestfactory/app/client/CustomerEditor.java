@@ -51,14 +51,6 @@ public class CustomerEditor extends Composite implements Editor<CustomerProxy>,
   @UiField
   Button addProvidedServiceButton;
 
-  OptionalFieldEditor<List<ProvidedServiceProxy>, ListEditor<ProvidedServiceProxy, ProvidedServiceEditor>> providedServices =
-          OptionalFieldEditor.of(ListEditor.<ProvidedServiceProxy, ProvidedServiceEditor> of( //
-    new EditorSource<ProvidedServiceEditor>() {
-
-      public ProvidedServiceEditor create(int index) {
-        return new ProvidedServiceEditor();
-      }
-    }));
 
   public CustomerEditor() {
     initWidget(uiBinder.createAndBindUi(this));
@@ -103,9 +95,6 @@ public class CustomerEditor extends Composite implements Editor<CustomerProxy>,
 
   @UiHandler("addProvidedServiceButton")
   public void onAddNewService(ClickEvent event) {
-
-    RequestFactoryEditorDelegate<CustomerProxy,CustomerEditor> delegate = (RequestFactoryEditorDelegate<CustomerProxy, CustomerEditor>) customerProxyEditorDelegate;
-
     ProvidedServiceProxy providedService = providedServiceCreationFactory.createProvidedService();
     customerProxy.getServices().add(providedService);
     setValue(customerProxy);

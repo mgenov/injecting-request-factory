@@ -10,6 +10,7 @@ import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.web.bindery.requestfactory.server.ServiceLayer;
+import com.google.web.bindery.requestfactory.server.ServiceLayerDecorator;
 import com.google.web.bindery.requestfactory.server.SimpleRequestProcessor;
 import com.google.web.bindery.requestfactory.server.testing.InProcessRequestTransport;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
@@ -31,7 +32,7 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.resetToDefault;
 
 /**
- * Provides an way of directly injection of {@link com.google.gwt.requestfactory.shared.RequestFactory} classes and target classes marked as {@literal@}ProvidedService. To provide injection
+ * Provides an way of directly injection of {@link RequestFactory} classes and target classes marked as {@literal@}ProvidedService. To provide injection
  * in your class you have to extends the {@link RequestFactoryJreTest}, after that you are free to inject service classes and RequestFactory classes.
  * <p/>
  * Here is an example how to accomplish this:
@@ -59,10 +60,10 @@ import static org.easymock.EasyMock.resetToDefault;
  *
  * </pre>
  * <p/>
- * To may run RequestFactory classes in simple JRE test, the {@link RequestFactoryJreTest} is using {@link com.google.gwt.requestfactory.server.testing.RequestFactoryMagic#create(Class)}  method
- * to create the application {@link com.google.gwt.requestfactory.shared.RequestFactory} then is initializing it using {@link com.google.gwt.requestfactory.server.testing.InProcessRequestTransport} and the EventBus.
+ * To may run RequestFactory classes in simple JRE test, the {@link RequestFactoryJreTest} is using {@link RequestFactorySource#create(Class)}  method
+ * to create the application {@link RequestFactory} then is initializing it using {@link InProcessRequestTransport} and the EventBus.
  * <p/>
- * RequestFactoryJreTest is an base test of all tests that are using {@link com.google.gwt.requestfactory.shared.RequestFactory} and are using mock objects
+ * RequestFactoryJreTest is an base test of all tests that are using {@link RequestFactory} and are using mock objects
  * to ensure that service methods are called correctly and are called in correct order.
  * <p/>
  *

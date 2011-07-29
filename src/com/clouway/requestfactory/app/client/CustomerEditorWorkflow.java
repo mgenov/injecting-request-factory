@@ -92,6 +92,13 @@ public class CustomerEditorWorkflow extends Composite {
 
     currentCustomer = entity;
 
+    customerEditor.setProvidedServiceCreationFactory(new ProvidedServiceCreationFactory() {
+
+      public ProvidedServiceProxy createProvidedService() {
+        return null;
+      }
+    });
+
     requestContext.store(currentCustomer).with(editorDriver.getPaths()).to(new Receiver<CustomerProxy>() {
       @Override
       public void onSuccess(CustomerProxy response) {

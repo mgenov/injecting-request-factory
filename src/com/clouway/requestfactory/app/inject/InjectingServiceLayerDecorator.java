@@ -4,10 +4,11 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.web.bindery.requestfactory.server.ServiceLayerDecorator;
 import com.google.web.bindery.requestfactory.shared.Locator;
+import com.google.web.bindery.requestfactory.shared.RequestContext;
+import com.google.web.bindery.requestfactory.shared.Service;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.lang.reflect.Method;
 import java.util.Set;
 
 /**
@@ -39,10 +40,11 @@ public class InjectingServiceLayerDecorator extends ServiceLayerDecorator {
   }
 
   @Override
-  public Object createServiceInstance(Method contextMethod, Method domainMethod) {
-    Class<?> serviceClazz = domainMethod.getDeclaringClass();
+  public Object createServiceInstance(Class<? extends RequestContext> requestContext) {
+    Class<?> serviceClazz = resolveServiceClass(requestContext);
     return injector.getInstance(serviceClazz);
   }
+
 
   /**
    * Invokes JSR 303 validator on a given domain object.

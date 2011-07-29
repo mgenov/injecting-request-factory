@@ -21,6 +21,8 @@
 
       <br/>
 
+      <g:Button text="+" ui:field="addProvidedServiceButton"/>
+
       <g:CaptionPanel captionText="Provided Services">
         <g:FlowPanel ui:field="services"/>
       </g:CaptionPanel>

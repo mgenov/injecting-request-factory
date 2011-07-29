@@ -203,14 +203,13 @@
   <component name="libraryTable">
     <library name="gwt-user">
       <CLASSES>
-        <root url="jar://$USER_HOME$/development/gwt-0.0.0/gwt-user.jar!/" />
-        <root url="jar://$USER_HOME$/development/gwt-0.0.0/gwt-servlet-deps.jar!/" />
-        <root url="jar://$USER_HOME$/development/gwt-0.0.0/gwt-servlet.jar!/" />
-        <root url="jar://$USER_HOME$/development/gwt-0.0.0/gwt-dev.jar!/" />
+        <root url="jar://$USER_HOME$/development/gwt-2.4.0-rc1/gwt-user.jar!/" />
+        <root url="jar://$USER_HOME$/development/gwt-2.4.0-rc1/gwt-servlet-deps.jar!/" />
+        <root url="jar://$USER_HOME$/development/gwt-2.4.0-rc1/gwt-dev.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/development/gwt-0.0.0/gwt-user.jar!/" />
+        <root url="jar://$USER_HOME$/development/gwt-2.4.0-rc1/gwt-user.jar!/" />
       </SOURCES>
     </library>
     <library name="lib">
@@ -230,6 +229,7 @@
         <root url="jar://$PROJECT_DIR$/lib/easymock-3.0.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/cglib-nodep-2.2.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/validation-api-1.0.0.GA-sources.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/requestfactory-apt.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />

@@ -5,18 +5,18 @@ import com.clouway.requestfactory.app.model.ProvidedService;
 import com.clouway.requestfactory.app.server.CustomerService;
 import com.clouway.requestfactory.app.shared.CustomerProxy;
 import com.clouway.requestfactory.app.shared.CustomerRequestFactory;
-import com.clouway.requestfactory.app.shared.ProvidedServiceProxy;
 import com.google.inject.Inject;
 import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 import org.easymock.Capture;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import static org.easymock.EasyMock.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -32,57 +32,34 @@ public class UpdateExistingEntityTest extends RequestFactoryJreTest {
   private CustomerService customerService;
 
   @Test
-  public void testUpdateCustomer() {
-    Capture<Customer> customerCapture = new Capture<Customer>();
+  public void findCustomerThenUpdateTheNameOfTheCustomer() {
     Customer customer1 = new Customer(1l, "customer1", new Date(), 21, 1l);
     customer1.getServices().add(new ProvidedService("testttttt", 20d));
+
+    Capture<Customer> customerCapture = new Capture<Customer>();
     expect(customerService.findCustomer(1l)).andReturn(customer1).anyTimes();
-    customerService.store(capture(customerCapture));
+    expect(customerService.store(capture(customerCapture))).andReturn(customer1);
     replay(customerService);
 
     CustomerRequestFactory.CustomerRequest request = rf.customerRequest();
     request.findCustomer(1l).with("services").to(new Receiver<CustomerProxy>() {
       @Override
-      public void onSuccess(CustomerProxy entity) {
-        CustomerRequestFactory.CustomerRequest editRequest = rf.customerRequest();
+      public void onSuccess(CustomerProxy customer) {
+        CustomerRequestFactory.CustomerRequest storeRequest = rf.customerRequest();
 
-        entity = editRequest.edit(entity);
+        customer = storeRequest.edit(customer);
+        customer.setName("changed_name");
 
-        entity.setName("test test");
-        entity.setVersion(2l);
-
-        List<ProvidedServiceProxy> services = new ArrayList<ProvidedServiceProxy>();
-
-        ProvidedServiceProxy service = editRequest.create(ProvidedServiceProxy.class);
-        service.setName("test1");
-        service.setPrice(20d);
-        services.add(service);
-        entity.getServices().add(service);
-
-
-        editRequest.store(entity).to(new Receiver<CustomerProxy>() {
+        storeRequest.store(customer).to(new Receiver<CustomerProxy>() {
           @Override
           public void onSuccess(CustomerProxy response) {
-
+            assertThat(response.getName(),is(equalTo("changed_name")));
           }
         }).fire();
       }
     }).fire();
 
-//    CustomerProxy p = request.create(CustomerProxy.class);
-//    p.setId(1l);
-//    p.setName("alal");
-//    p.setVersion(1l);
-//
-//    request.store(p).to(new Receiver<Void>() {
-//      @Override
-//      public void onSuccess(Void response) {
-//
-//      }
-//    }).fire();
-
-    Customer actualCustomer = customerCapture.getValue();
-    assertThat("date was erased ?",actualCustomer.getInstallationDate(), is(not(nullValue())));
+    assertThat("customer name was not updated correctly after name was updated?",customerCapture.getValue().getName(),is(equalTo("changed_name")));
 
     verify(customerService);
   }

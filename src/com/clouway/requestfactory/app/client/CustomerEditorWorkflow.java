@@ -93,13 +93,11 @@ public class CustomerEditorWorkflow extends Composite {
       @Override
       public void onSuccess(PreviewResultProxy response) {
         previewedCustomer = response.getCustomer();
-
         save.setEnabled(true);
 
         Window.alert("Preview: " + response.getHtmlContent());
       }
     });
-
   }
 
   @UiHandler("preview")
@@ -111,12 +109,11 @@ public class CustomerEditorWorkflow extends Composite {
   @UiHandler("save")
   public void onSaveCustomer(ClickEvent clickEvent) {
     CustomerRequest customerRequest = requestFactory.customerRequest();
-    customerRequest.edit(previewedCustomer);
-
+    previewedCustomer = customerRequest.edit(previewedCustomer);
     customerRequest.store(previewedCustomer).to(new Receiver<CustomerProxy>() {
       @Override
       public void onSuccess(CustomerProxy response) {
-        Window.alert("Customer was updated successfully.");
+        Window.alert("Customer was updated successfully. The customer is now known as " + response.getName());
       }
     }).fire();
 

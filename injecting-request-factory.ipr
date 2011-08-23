@@ -59,6 +59,28 @@
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="true" />
   </component>
+  <component name="NullableNotNullManager">
+    <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
+    <option name="myDefaultNotNull" value="org.jetbrains.annotations.NotNull" />
+    <option name="myNullables">
+      <value>
+        <list size="3">
+          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
+          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
+          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
+        </list>
+      </value>
+    </option>
+    <option name="myNotNulls">
+      <value>
+        <list size="3">
+          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
+          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
+          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
+        </list>
+      </value>
+    </option>
+  </component>
   <component name="Palette2">
     <group name="Swing">
       <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
@@ -203,13 +225,15 @@
   <component name="libraryTable">
     <library name="gwt-user">
       <CLASSES>
-        <root url="jar://$USER_HOME$/development/gwt-2.4.0-rc1/gwt-user.jar!/" />
-        <root url="jar://$USER_HOME$/development/gwt-2.4.0-rc1/gwt-servlet-deps.jar!/" />
-        <root url="jar://$USER_HOME$/development/gwt-2.4.0-rc1/gwt-dev.jar!/" />
+        <root url="jar://$GWT_HOME$/gwt-user.jar!/" />
+        <root url="jar://$GWT_HOME$/gwt-servlet-deps.jar!/" />
+        <root url="jar://$GWT_HOME$/gwt-dev.jar!/" />
+        <root url="jar://$GWT_HOME$/validation-api-1.0.0.GA-sources.jar!/" />
+        <root url="jar://$GWT_HOME$/validation-api-1.0.0.GA.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/development/gwt-2.4.0-rc1/gwt-user.jar!/" />
+        <root url="jar://$GWT_HOME$/gwt-user.jar!/" />
       </SOURCES>
     </library>
     <library name="lib">

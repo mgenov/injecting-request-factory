@@ -3,6 +3,7 @@ package com.clouway.requestfactory.app.client;
 import com.clouway.requestfactory.app.shared.CustomerProxy;
 import com.clouway.requestfactory.app.shared.CustomerRequestFactory;
 import com.clouway.requestfactory.app.shared.CustomerRequestFactory.CustomerRequest;
+import com.clouway.requestfactory.app.shared.PreviewResultProxy;
 import com.clouway.requestfactory.app.shared.ProvidedServiceProxy;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -29,14 +30,14 @@ public class CustomerEditorWorkflow extends Composite {
 
 
   interface CustomerEditorWorkflowUiBinder extends UiBinder<Widget, CustomerEditorWorkflow> {
-  }
 
+  }
   private static CustomerEditorWorkflowUiBinder ourUiBinder = GWT.create(CustomerEditorWorkflowUiBinder.class);
 
   interface Driver extends
           RequestFactoryEditorDriver<CustomerProxy, CustomerEditor> {
-  }
 
+  }
   private Driver editorDriver;
 
   @UiField
@@ -49,12 +50,16 @@ public class CustomerEditorWorkflow extends Composite {
   Button save;
 
   private final CustomerRequestFactory requestFactory;
+
   public CustomerProxy currentCustomer;
+  private CustomerProxy previewedCustomer;
 
   public CustomerEditorWorkflow(CustomerRequestFactory requestFactory) {
     this.requestFactory = requestFactory;
 
     initWidget(ourUiBinder.createAndBindUi(this));
+
+    save.setEnabled(false);
   }
 
   public void loadCustomer(Long customerId) {
@@ -84,41 +89,36 @@ public class CustomerEditorWorkflow extends Composite {
 
     currentCustomer = entity;
 
-    customerEditor.setProvidedServiceCreationFactory(new ProvidedServiceCreationFactory() {
+    requestContext.previewCustomer(currentCustomer).to(new Receiver<PreviewResultProxy>() {
+      @Override
+      public void onSuccess(PreviewResultProxy response) {
+        previewedCustomer = response.getCustomer();
 
-      public ProvidedServiceProxy createProvidedService() {
-        return null;
+        save.setEnabled(true);
+
+        Window.alert("Preview: " + response.getHtmlContent());
       }
     });
 
-    requestContext.store(currentCustomer).with(editorDriver.getPaths()).to(new Receiver<CustomerProxy>() {
-      @Override
-      public void onSuccess(CustomerProxy response) {
-
-        editCustomer(response);
-      }
-
-      @Override
-      public void onFailure(ServerFailure error) {
-
-      }
-
-      @Override
-      public void onConstraintViolation(Set<ConstraintViolation<?>> violations) {
-        editorDriver.setConstraintViolations(violations);
-      }
-    });
   }
 
   @UiHandler("preview")
   public void onPreview(ClickEvent clickEvent) {
     RequestContext requestContext = editorDriver.flush();
-
-    if (editorDriver.hasErrors()) {
-      Window.alert("Errors detected locally");
-      return;
-    }
-
     requestContext.fire();
+  }
+
+  @UiHandler("save")
+  public void onSaveCustomer(ClickEvent clickEvent) {
+    CustomerRequest customerRequest = requestFactory.customerRequest();
+    customerRequest.edit(previewedCustomer);
+
+    customerRequest.store(previewedCustomer).to(new Receiver<CustomerProxy>() {
+      @Override
+      public void onSuccess(CustomerProxy response) {
+        Window.alert("Customer was updated successfully.");
+      }
+    }).fire();
+
   }
 }

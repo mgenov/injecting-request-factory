@@ -11,4 +11,6 @@ public interface CustomerService {
 
   Customer store(Customer customer);
 
+  PreviewResult previewCustomer(Customer customer);
+
 }

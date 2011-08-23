@@ -17,6 +17,8 @@ public interface CustomerRequestFactory extends RequestFactory {
   @Service(value = CustomerService.class, locator = InjectingServiceLocator.class)
   interface CustomerRequest extends RequestContext {
 
+    Request<PreviewResultProxy> previewCustomer(CustomerProxy customerProxy);
+
     Request<CustomerProxy> store(CustomerProxy customerProxy);
 
     Request<CustomerProxy> findCustomer(Long id);

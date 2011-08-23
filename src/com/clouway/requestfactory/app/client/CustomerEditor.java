@@ -32,7 +32,6 @@ public class CustomerEditor extends Composite implements Editor<CustomerProxy>,
 
   private EditorChain<ProvidedServiceProxy, ProvidedServiceEditor> editorChain;
   private ProvidedServiceCreationFactory providedServiceCreationFactory;
-  private EditorDelegate<CustomerProxy> customerProxyEditorDelegate;
   private CustomerProxy customerProxy;
 
   interface CustomerEditorUiBinder extends UiBinder<HTMLPanel, CustomerEditor> { }
@@ -101,7 +100,7 @@ public class CustomerEditor extends Composite implements Editor<CustomerProxy>,
   }
 
   public void setDelegate(EditorDelegate<CustomerProxy> customerProxyEditorDelegate) {
-    this.customerProxyEditorDelegate = customerProxyEditorDelegate;
+
   }
 
 }

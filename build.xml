@@ -66,7 +66,7 @@
       <arg value="${build.dir}"/>
       <!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
       <arg line="${gwt.args}"/>
-      <arg value="com.clouway.requestfactory.app.client.MySampleApplication"/>
+      <arg value="com.clouway.requestfactory.app.MySampleApplication"/>
     </java>
   </target>
 
